@@ -10,6 +10,7 @@ use Clio\Beer\Domain\Model\Brewery;
 use Clio\Beer\Domain\Repository\BeerRepository;
 use TYPO3\Flow\Annotations as Flow;
 use Clio\Beer\Domain\Model\Beer;
+use TYPO3\Flow\Error\Debugger;
 use TYPO3\Flow\Persistence\Doctrine\PersistenceManager;
 
 class BeerController extends \TYPO3\Flow\Mvc\Controller\ActionController {
@@ -37,12 +38,6 @@ class BeerController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	 */
 	public function indexAction() {
 		$this->view->assign('beers', $this->beerRepository->findAll());
-		$brew = new Brewery();
-		$brew->setName('Heineken');
-		foreach ($this->beerRepository->findAll() as $beer) {
-			$beer->setBrewery($brew);
-		}
-
 		$this->persistenceManager->persistAll();
 	}
 
@@ -66,7 +61,7 @@ class BeerController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 		$this->addFlashMessage('Beer created', 'OK', \TYPO3\Flow\Error\Message::SEVERITY_OK);
 		$this->redirect('index');
 	}
-	
+
 }
 
 ?>

@@ -8,8 +8,6 @@ namespace Clio\Beer\Domain\Model;
 
 use TYPO3\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\Flow\Session\SessionInterface;
-use TYPO3\Flow\Tests\Object\Fixture\SomeInterface;
 
 /**
  * @Flow\Entity
@@ -30,7 +28,7 @@ class Beer {
 
 	/**
 	 * @var \Clio\Beer\Domain\Model\Brewery
-	 * @ORM\ManytoOne(inversedBy="beers")
+	 * @ORM\ManyToOne(inversedBy="beers")
 	 */
 	protected $brewery;
 

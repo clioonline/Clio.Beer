@@ -3,7 +3,7 @@ roles:
   Brewer: []
 resources:
   methods:
-    newBeerMethods: 'method(Clio\Beer\Controller\BeerController->new())'
+    newBeerMethods: 'method(Clio\Beer\Controller\BeerController->new.*())'
 acls:
   Administrator:
     methods:

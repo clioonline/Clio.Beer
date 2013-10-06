@@ -1,0 +1,33 @@
+<f:layout name="Default" />
+
+<f:section name="Title">New beer</f:section>
+
+<f:section name="Content">
+	<p>Everyone likes beer, so go ahead and create one!</p>
+	<f:form action="create" object="{beer}" name="beer" class="form-horizontal">
+		<div class="form-group">
+			<label for="name" class="col-lg-2 control-label">Beer name</label>
+			<div class="col-lg-4">
+				<f:form.textfield property="name" class="form-control"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="alcoholByVolume" class="col-lg-2 control-label">Abv</label>
+			<div class="col-lg-4">
+				<f:form.textfield property="alcoholByVolume" class="form-control"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="brewery" class="col-lg-2 control-label">Brewery</label>
+			<div class="col-lg-4">
+				<f:form.select property="brewery" options="{breweries}" optionLabelField="name" class="form-control"/>
+			</div>
+		</div>
+
+		<div class="form-group">
+		    <div class="col-lg-offset-2 col-lg-10">
+				<button type="submit" class="btn btn-default">Submit</button>
+			</div>
+		</div>
+	</f:form>
+</f:section>

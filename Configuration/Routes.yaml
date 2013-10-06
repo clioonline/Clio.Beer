@@ -1,0 +1,17 @@
+
+-
+  name: 'Default beer route'
+  uriPattern: ''
+  defaults:
+    '@package': 'Clio.Beer'
+    '@controller': 'Standard'
+    '@action': 'index'
+
+-
+  name: 'Beer'
+  uriPattern: 'beer'
+  defaults:
+    '@package': 'Clio.Beer'
+    '@controller': 'Beer'
+    '@action': 'index'
+    '@format': 'html'

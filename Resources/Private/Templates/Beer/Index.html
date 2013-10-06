@@ -1,0 +1,16 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Beers on tap</f:section>
+
+<f:section name="Content">
+	<ul>
+		<f:for each="{beers}" as="beer">
+			<li>
+				<f:if condition="{beer.brewery}">
+					{beer.brewery.name}:
+				</f:if>
+				{beer.name} ({beer.alcoholByVolume}% abv)</li>
+		</f:for>
+	</ul>
+	<f:link.action class="btn btn-default" action="new">Create new beer</f:link.action>
+</f:section>

@@ -1,0 +1,33 @@
+<f:layout name="Default" />
+<f:section name="Title">Log ind</f:section>
+<f:section name="Content">
+	<f:security.ifAuthenticated>
+		<f:then>
+			<f:link.action action="logout" controller="Authentication">Log ud</f:link.action>
+		</f:then>
+		<f:else>
+			<f:form action="authenticate" controller="Authentication" method="post" class="form-horizontal">
+				<fieldset>
+					<div class="form-group">
+						<label for="username" class="col-lg-2 control-label">Username</label>
+						<div class="col-lg-4">
+							<f:form.textfield id="username" name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][username]" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-lg-2 control-label">Password</label>
+						<div class="col-lg-4">
+							<f:form.password id="password" name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][password]" />
+						</div>
+					</div>
+				</fieldset>
+				<div class="form-group">
+				    <div class="col-lg-offset-2 col-lg-10">
+						<f:form.submit value="Log ind" class="btn btn-default"/>
+					</div>
+				</div>
+			</f:form>
+			<div class="clearfix"></div>
+		</f:else>
+	</f:security.ifAuthenticated>
+</f:section>

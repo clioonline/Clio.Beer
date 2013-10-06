@@ -1,0 +1,13 @@
+roles:
+  Administrator: []
+  Brewer: []
+resources:
+  methods:
+    newBeerMethods: 'method(Clio\Beer\Controller\BeerController->new())'
+acls:
+  Administrator:
+    methods:
+      newBeerMethods: GRANT
+  Brewer:
+    methods:
+      newBeerMethods: GRANT

@@ -18,13 +18,21 @@ class Beer {
 
 	/**
 	 * @var string
+	 * @Flow\Validate(type="NotEmpty")
 	 */
 	protected $name;
 
-	/*
+	/**
 	 * @var float
+	 * @Flow\Validate(type="NotEmpty")
 	 */
 	protected $alcoholByVolume;
+
+	/**
+	 * @var \Clio\Beer\Domain\Model\Brewery
+	 * @ORM\ManytoOne(inversedBy="beers")
+	 */
+	protected $brewery;
 
 	/**
 	 * @param float $alcoholByVolume
@@ -54,6 +62,21 @@ class Beer {
 	 */
 	public function getName() {
 		return $this->name;
+	}
+
+	/**
+	 * @param \Clio\Beer\Domain\Model\Brewery $brewery
+	 * @return void
+	 */
+	public function setBrewery($brewery) {
+		$this->brewery = $brewery;
+	}
+
+	/**
+	 * @return \Clio\Beer\Domain\Model\Brewery
+	 */
+	public function getBrewery() {
+		return $this->brewery;
 	}
 
 }

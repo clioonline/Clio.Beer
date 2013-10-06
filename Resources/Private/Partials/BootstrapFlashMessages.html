@@ -1,0 +1,40 @@
+<f:flashMessages as="flashmessages" severity="OK">
+	<f:if condition="{flashmessages}">
+		<div class="alert alert-success">
+			<f:for each="{flashmessages}" as="message">
+				<strong>{message.title}:</strong>{message.message}<br />
+			</f:for>
+		</div>
+	</f:if>
+</f:flashMessages>
+
+<f:flashMessages as="flashmessages" severity="Warning">
+	<f:if condition="{flashmessages}">
+		<div class="alert">
+			<f:for each="{flashmessages}" as="message">
+				<strong>{message.title}:</strong>{message.message}<br />
+			</f:for>
+		</div>
+	</f:if>
+</f:flashMessages>
+
+<f:flashMessages as="flashmessages" severity="Notice">
+	<f:if condition="{flashmessages}">
+		<div class="alert alert-info">
+			<f:for each="{flashmessages}" as="message">
+				<strong>{message.title}:</strong>{message.message}<br />
+			</f:for>
+		</div>
+	</f:if>
+</f:flashMessages>
+
+
+<f:flashMessages as="flashmessages" severity="Error">
+	<f:if condition="{flashmessages}">
+		<div class="alert alert-error">
+			<f:for each="{flashmessages}" as="message">
+				<strong>{message.title}:</strong>{message.message}<br />
+			</f:for>
+		</div>
+	</f:if>
+</f:flashMessages>

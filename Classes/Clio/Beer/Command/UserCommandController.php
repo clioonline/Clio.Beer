@@ -27,15 +27,14 @@ class UserCommandController extends \TYPO3\Flow\Cli\CommandController {
 	 * Create a new user
 	 *
 	 * This command creates a new user which has access to the backend user interface.
-	 * It is recommended to user the email address as a username.
+	 * It is recommended to use the email address as a username.
 	 *
 	 * @param string $username The username of the user to be created.
 	 * @param string $password Password of the user to be created
-	 * @param string $roles A comma separated list of roles to assign
+	 * @param string $roles A comma separated list of roles to assign Examples are Clio.Beer:Administrator og Clio.Beer:Brewer
 	 * @param string $authenticationProvider The name of the authentication provider to use (Default is 'DefaultProvider)
 	 *
 	 * @Flow\Validate(argumentName="username", type="NotEmpty")
-	 * @Flow\Validate(argumentName="username", type="\DomusPro\Webservice\Validation\Validator\AccountExistsValidator")
 	 * @Flow\Validate(argumentName="password", type="NotEmpty")
 	 *
 	 * @return void

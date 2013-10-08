@@ -1,0 +1,13 @@
+<f:layout name="Default" />
+
+<f:section name="Title">{brewery.name}</f:section>
+
+<f:section name="Content">
+
+	<p>Here is a list of all the beers of the brewery {brewery.name}:</p>
+	<ul>
+		<f:for each="{brewery.beers}" as="beer">
+			<li>{beer.name}</li>
+		</f:for>
+	</ul>
+</f:section>

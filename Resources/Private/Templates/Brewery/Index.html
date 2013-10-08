@@ -1,0 +1,17 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Breweries</f:section>
+
+<f:section name="Content">
+
+	<p>All breweries in the system.</p>
+	<p>New breweries are created one the commandline using the beer:createbrewery command like this:
+	<pre>./flow beer:createbrewery <BREWERYNAME></pre>
+	<h2>Breweries</h2>
+	<ul>
+		<f:for each="{breweries}" as="brewery">
+			<li><f:link.action action="show" arguments="{brewery: brewery}">{brewery.name}</f:link.action></li>
+		</f:for>
+
+	</ul>
+</f:section>

@@ -7,7 +7,6 @@ use TYPO3\Flow\Error\Message;
 /**
  * Class AuthenticationController
  *
- * @package DomusPro\Webservice\Controller
  * @Flow\Scope("singleton")
  */
 class AuthenticationController extends \TYPO3\Flow\Security\Authentication\Controller\AbstractAuthenticationController {

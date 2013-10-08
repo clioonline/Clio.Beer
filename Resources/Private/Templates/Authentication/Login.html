@@ -1,13 +1,18 @@
 <f:layout name="Default" />
-<f:section name="Title">Log ind</f:section>
+<f:section name="Title">Log in</f:section>
 <f:section name="Content">
 	<f:security.ifAuthenticated>
 		<f:then>
 			<f:link.action action="logout" controller="Authentication">Log ud</f:link.action>
 		</f:then>
 		<f:else>
+			<p>Please login to access specific parts of the site.</p>
+			<p>The Clio.Beer packages contains a Command controller to add new users. Use the following command to create a new user</p>
+			<pre>./flow user:createaccount USERNAME PASSWORD Clio.Beer:Administrator</pre>
+
 			<f:form action="authenticate" controller="Authentication" method="post" class="form-horizontal">
 				<fieldset>
+					<legend>Login</legend>
 					<div class="form-group">
 						<label for="username" class="col-lg-2 control-label">Username</label>
 						<div class="col-lg-4">

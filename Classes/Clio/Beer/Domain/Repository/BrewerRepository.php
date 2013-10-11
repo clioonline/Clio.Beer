@@ -12,4 +12,9 @@ use TYPO3\Flow\Persistence\Repository;
 /**
  * @Flow\Scope("singleton")
  */
-class BreweryRepository extends Repository {}
+class BrewerRepository extends Repository {
+
+	// add customized methods here
+
+}
+?>

@@ -7,10 +7,18 @@ use TYPO3\Flow\Error\Message;
 /**
  * Class AuthenticationController
  *
- * @package DomusPro\Webservice\Controller
  * @Flow\Scope("singleton")
  */
 class AuthenticationController extends \TYPO3\Flow\Security\Authentication\Controller\AbstractAuthenticationController {
+
+	/**
+	 * Override the loginAction of the abstract controller in order to add the account to the view.
+	 *
+	 * @return void
+	 */
+	public function loginAction() {
+		$this->view->assign('account', $this->securityContext->getAccount());
+	}
 
 	/**
 	 * Is called if authentication was successful. If there has been an

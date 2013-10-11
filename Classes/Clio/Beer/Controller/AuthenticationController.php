@@ -12,6 +12,15 @@ use TYPO3\Flow\Error\Message;
 class AuthenticationController extends \TYPO3\Flow\Security\Authentication\Controller\AbstractAuthenticationController {
 
 	/**
+	 * Override the loginAction of the abstract controller in order to add the account to the view.
+	 *
+	 * @return void
+	 */
+	public function loginAction() {
+		$this->view->assign('account', $this->securityContext->getAccount());
+	}
+
+	/**
 	 * Is called if authentication was successful. If there has been an
 	 * intercepted request due to security restrictions, you might want to use
 	 * something like the following code to restart the originally intercepted

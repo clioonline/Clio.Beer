@@ -1,9 +1,28 @@
 <?php
 namespace Clio\Beer\Command;
 
+use Clio\Beer\Domain\Model\Brewer;
 use TYPO3\Flow\Annotations as Flow;
 
 class UserCommandController extends \TYPO3\Flow\Cli\CommandController {
+
+	/**
+	 * @var \TYPO3\Flow\Validation\ValidatorResolver
+	 * @Flow\Inject
+	 */
+	protected $validatorResolver;
+
+	/**
+	 * @var \TYPO3\Flow\Persistence\Doctrine\PersistenceManager
+	 * @Flow\Inject
+	 */
+	protected $persistenceManager;
+
+	/**
+	 * @Flow\Inject
+	 * @var \Clio\Beer\Domain\Repository\BrewerRepository
+	 */
+	protected $brewerRepository;
 
 	/**
 	 * @Flow\Inject
@@ -29,20 +48,60 @@ class UserCommandController extends \TYPO3\Flow\Cli\CommandController {
 	 * This command creates a new user which has access to the backend user interface.
 	 * It is recommended to use the email address as a username.
 	 *
+	 * Notice that accounts must be linked to a brewer. So please use the createBrewer command to create brewer
+	 * records first.
+	 *
 	 * @param string $username The username of the user to be created.
 	 * @param string $password Password of the user to be created
+	 * @param string $brewerName The name of the brewer to link this account to.
 	 * @param string $roles A comma separated list of roles to assign Examples are Clio.Beer:Administrator og Clio.Beer:Brewer
 	 * @param string $authenticationProvider The name of the authentication provider to use (Default is 'DefaultProvider)
-	 *
-	 * @Flow\Validate(argumentName="username", type="NotEmpty")
-	 * @Flow\Validate(argumentName="password", type="NotEmpty")
-	 *
 	 * @return void
 	 */
-	public function createAccountCommand($username, $password, $roles, $authenticationProvider = 'DefaultProvider') {
+	public function createAccountCommand($username, $password, $brewerName, $roles, $authenticationProvider = 'DefaultProvider') {
+		$validator = $this->validatorResolver->createValidator('Clio.Beer:UniqueAccount');
+		$result = $validator->validate($username);
+		if ($result->hasErrors()) {
+			foreach ($result->getErrors() as $error) {
+				$this->outputLine($error->getMessage());
+			}
+			$this->sendAndExit(2);
+		}
+
+		$brewer = $this->brewerRepository->findOneByName($brewerName);
+		if ($brewer === NULL) {
+			$this->outputLine('Unable to find brewer with name ' . $name);
+			$this->sendAndExit(1);
+		}
 		$account = $this->accountFactory->createAccountWithPassword($username, $password, explode(',', $roles), $authenticationProvider);
+		$account->setParty($brewer);
 		$this->accountRepository->add($account);
 		$this->outputLine('Created account "%s".', array($username));
+		$this->persistenceManager->persistAll();
+	}
+
+	/**
+	 * Create a new entry in the Brewer command
+	 *
+	 * @param string $name
+	 * @Flow\Validate(argumentName="username", type="NotEmpty")
+	 * @return void
+	 */
+	public function createBrewerCommand($name) {
+		$validator = $this->validatorResolver->createValidator('Clio.Beer:UniqueBrewer');
+		$result = $validator->validate($name);
+		if ($result->hasErrors()) {
+			foreach ($result->getErrors() as $error) {
+				$this->outputLine($error->getMessage());
+			}
+			$this->sendAndExit(2);
+		}
+		$brewer = new Brewer();
+		$brewer->setName($name);
+		$this->brewerRepository->add($brewer);
+		$this->outputLine('Create new brewer with name ' . $name);
+		$this->persistenceManager->persistAll();
+
 	}
 
 	/**
